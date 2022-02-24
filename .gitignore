@@ -45,3 +45,7 @@ captures/
 
 # Library Build files
 utility/build/
+/gradlew.bat
+/gradlew
+/gradle/wrapper/gradle-wrapper.properties
+/gradle/wrapper/gradle-wrapper.jar
