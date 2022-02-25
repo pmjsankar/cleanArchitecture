@@ -9,6 +9,6 @@ import retrofit2.http.GET
  */
 interface ApiService {
 
-    @GET("livemenu")
+    @GET("dining-v2")
     suspend fun getDining(): Response<List<Dining>>
 }

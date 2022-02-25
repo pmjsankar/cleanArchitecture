@@ -78,7 +78,7 @@ dependencies {
     implementation kotlin.kotlinxCoroutines
 
     //Glide
-    implementation others.picasso
+    implementation others.glide
 
     // optional - Test helpers for LiveData
     testImplementation testing.unitTestingCore

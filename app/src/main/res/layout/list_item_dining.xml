@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.pmj.domain.model.Dining" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvDining"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/dimen_4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDining"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dimen_10dp">
+
+            <ImageView
+                android:id="@+id/ivDining"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_120dp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:transitionName="@{item.imageUrl}"
+                app:imageUrl="@{item.imageUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvOffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:background="@color/blue"
+                android:maxLines="1"
+                android:paddingStart="@dimen/dimen_4dp"
+                android:paddingTop="@dimen/dimen_2dp"
+                android:paddingEnd="@dimen/dimen_4dp"
+                android:paddingBottom="@dimen/dimen_2dp"
+                android:text="@{item.offer + @string/_off}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/ivDining"
+                app:layout_constraintStart_toStartOf="@+id/ivDining"
+                tools:text="@tools:sample/lorem" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:autoSizeMaxTextSize="@dimen/text_16"
+                android:autoSizeMinTextSize="@dimen/text_14"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:maxLines="2"
+                android:text="@{item.title}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tvRating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivDining"
+                tools:text="Father of Android" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="@{item.rating > 4.0 ? @color/green : @color/red }"
+                android:drawableStart="@drawable/ic_star"
+                android:paddingStart="@dimen/dimen_4dp"
+                android:paddingTop="@dimen/dimen_2dp"
+                android:paddingEnd="@dimen/dimen_4dp"
+                android:paddingBottom="@dimen/dimen_2dp"
+                android:text="@{item.rating.toString()}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_12"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvTitle"
+                app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.SmallComponent"
+                tools:text="4.5" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:maxLines="3"
+                android:text="@{item.desc}"
+                android:textSize="@dimen/text_12"
+                app:layout_constraintEnd_toStartOf="@+id/tvPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                tools:text="@tools:sample/lorem/random" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:maxLines="1"
+                android:text="@{`~`+item.price}"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvDesc"
+                app:layout_constraintTop_toTopOf="@+id/tvDesc"
+                tools:text="@tools:sample/lorem" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

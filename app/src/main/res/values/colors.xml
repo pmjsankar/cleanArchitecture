@@ -6,5 +6,13 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="semi_black">#666666</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#ffa500</color>
+    <color name="green">#198c19</color>
+    <color name="blue">#2F84EA</color>
+    <color name="bg_color">#EEE</color>
+    <color name="window_bg">#f9fbfd</color>
+    <color name="ic_launcher_background">#9A0E20</color>
 </resources>

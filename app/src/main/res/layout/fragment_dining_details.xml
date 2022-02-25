@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.pmj.domain.model.Dining" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDiningDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/go_back"
+            android:focusable="true"
+            android:padding="@dimen/dimen_8dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDiningTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:text="@{item.title}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="@id/ivBack"
+            tools:text="@tools:sample/lorem" />
+
+        <ImageView
+            android:id="@+id/ivDiningDetails"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_220dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:transitionName="@{item.imageUrl}"
+            app:imageUrl="@{item.imageUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiningTitle"
+            tools:src="@drawable/ic_placeholder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDiningDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:maxLines="3"
+            android:paddingStart="@dimen/dimen_16dp"
+            android:paddingEnd="@dimen/dimen_8dp"
+            android:text="@{item.desc}"
+            android:textColor="@color/semi_black"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintEnd_toStartOf="@+id/clRating"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDiningDetails"
+            tools:text="@tools:sample/lorem/random" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="@{item.rating > 4.0 ? @color/green : @color/red }"
+            android:padding="@dimen/dimen_4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDiningDesc">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:drawableTop="@drawable/ic_star"
+                android:paddingStart="@dimen/dimen_4dp"
+                android:paddingTop="@dimen/dimen_2dp"
+                android:paddingEnd="@dimen/dimen_4dp"
+                android:paddingBottom="@dimen/dimen_2dp"
+                android:text="@{item.rating.toString()}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.SmallComponent"
+                tools:text="4.5" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvRatingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/_reviews"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDiningAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:maxLines="2"
+            android:paddingStart="@dimen/dimen_16dp"
+            android:paddingEnd="@dimen/dimen_8dp"
+            android:text="@{item.address}"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintEnd_toStartOf="@+id/clRating"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiningDesc"
+            tools:text="@tools:sample/lorem/random" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDiningTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dimen_16dp"
+            android:paddingEnd="@dimen/dimen_8dp"
+            android:text="@{@string/timing_ + item.timing}"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiningAddress"
+            tools:text="@tools:sample/lorem/random" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

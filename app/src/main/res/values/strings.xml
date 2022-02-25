@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">CleanArchitecture</string>
+    <string name="app_name">Fine Dining</string>
+    <string name="_off"> % OFF</string>
+    <string name="timing_">Timing: </string>
+    <string name="go_back">Go to previous screen</string>
+    <string name="_reviews">2,456\nReviews</string>
+    <string name="retry">RETRY</string>
 </resources>
