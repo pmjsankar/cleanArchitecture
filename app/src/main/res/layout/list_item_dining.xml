@@ -18,7 +18,7 @@
         android:layout_margin="@dimen/dimen_8dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/card_bg"
         app:cardElevation="@dimen/dimen_4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +71,7 @@
                 android:autoSizeTextType="uniform"
                 android:maxLines="2"
                 android:text="@{item.title}"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/tvRating"
@@ -108,8 +108,10 @@
                 android:layout_marginStart="@dimen/dimen_8dp"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:layout_marginBottom="@dimen/dimen_8dp"
+                android:ellipsize="end"
                 android:maxLines="3"
                 android:text="@{item.desc}"
+                android:textColor="@color/text_color_secondary"
                 android:textSize="@dimen/text_12"
                 app:layout_constraintEnd_toStartOf="@+id/tvPrice"
                 app:layout_constraintStart_toStartOf="parent"
@@ -126,6 +128,7 @@
                 android:layout_marginBottom="@dimen/dimen_8dp"
                 android:maxLines="1"
                 android:text="@{`~`+item.price}"
+                android:textColor="@color/text_color"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvDesc"

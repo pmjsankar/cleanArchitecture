@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clDiningDetails"
         android:layout_width="match_parent"
+        android:background="@color/window_bg"
         android:layout_height="match_parent">
 
         <ImageView
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_16dp"
             android:text="@{item.title}"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/text_18"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/ivBack"
@@ -66,7 +67,7 @@
             android:paddingStart="@dimen/dimen_16dp"
             android:paddingEnd="@dimen/dimen_8dp"
             android:text="@{item.desc}"
-            android:textColor="@color/semi_black"
+            android:textColor="@color/text_color_secondary"
             android:textSize="@dimen/text_16"
             app:layout_constraintEnd_toStartOf="@+id/clRating"
             app:layout_constraintStart_toStartOf="parent"

@@ -6,10 +6,10 @@
     <color name="green">#198c19</color>
     <color name="blue">#2F84EA</color>
 
-    <color name="status_bar_color">#EEE</color>
-    <color name="window_bg">#f9fbfd</color>
-    <color name="card_bg">#FFFFFFFF</color>
-    <color name="text_color">#FF000000</color>
+    <color name="status_bar_color">#161112</color>
+    <color name="window_bg">#191314</color>
+    <color name="card_bg">#332628</color>
+    <color name="text_color">#FFFFFFFF</color>
     <color name="text_color_secondary">#999999</color>
 
 </resources>
