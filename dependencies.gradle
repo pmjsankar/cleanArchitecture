@@ -1,5 +1,5 @@
 ext {
-    def gradleVersion = "7.0.4"
+    def gradleVersion = "7.1.2"
     def kotlinGradleVersion = "1.6.10"
     def hiltGradleVersion = "2.40.5"
     def appCompatVersion = "1.4.1"
