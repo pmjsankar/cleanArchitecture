@@ -22,7 +22,7 @@ class DiningRemoteDataSource @Inject constructor(
     suspend fun fetchDining(): Output<List<Dining>> {
         return getResponse(
             request = { apiService.getDining() },
-            defaultErrorMessage = "Error fetching dining details"
+            defaultErrorMessage = "Something went wrong"
         )
     }
 }

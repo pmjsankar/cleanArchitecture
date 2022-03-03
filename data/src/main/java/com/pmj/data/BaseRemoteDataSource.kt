@@ -25,7 +25,6 @@ abstract class BaseRemoteDataSource constructor(
         defaultErrorMessage: String
     ): Output<T> {
         return try {
-            println("I'm working in thread ${Thread.currentThread().name}")
             val result = request.invoke()
             if (result.isSuccessful) {
                 return Output.success(result.body())
@@ -34,7 +33,7 @@ abstract class BaseRemoteDataSource constructor(
                 Output.error(errorResponse?.statusMessage ?: defaultErrorMessage, errorResponse)
             }
         } catch (e: Throwable) {
-            Output.error("Unknown Error", null)
+            Output.error("Something went wrong", null)
         }
     }
 

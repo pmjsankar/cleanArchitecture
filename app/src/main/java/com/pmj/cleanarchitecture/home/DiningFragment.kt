@@ -44,6 +44,7 @@ class DiningFragment : Fragment() {
             adapter = DiningAdapter(onItemClick)
             it.rvDiningList.adapter = adapter
             it.swipeRefresh.setOnRefreshListener {
+                hideSnackBar()
                 diningViewModel.fetchDining()
             }
         }
@@ -89,15 +90,17 @@ class DiningFragment : Fragment() {
         view?.let {
             snackBar = Snackbar.make(it, msg, Snackbar.LENGTH_INDEFINITE)
             snackBar?.setAction(getString(R.string.retry)) {
-                snackBar?.dismiss()
+                hideSnackBar()
                 onRetry.invoke()
             }
             snackBar?.show()
         }
     }
 
+    private fun hideSnackBar() = snackBar?.dismiss()
+
     override fun onStop() {
-        snackBar?.dismiss()
+        hideSnackBar()
         super.onStop()
     }
 }
