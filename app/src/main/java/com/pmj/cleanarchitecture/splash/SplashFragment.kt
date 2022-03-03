@@ -11,7 +11,7 @@ import com.pmj.cleanarchitecture.R
 import com.pmj.cleanarchitecture.databinding.FragmentSplashBinding
 
 /**
- * Fragment class to the show splash screen.
+ * Fragment class to show the splash screen.
  */
 class SplashFragment : Fragment() {
 
