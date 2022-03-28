@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +18,7 @@ import com.pmj.cleanarchitecture.home.DiningDetailsFragment.Companion.ARG_DETAIL
 import com.pmj.domain.model.Dining
 import com.pmj.domain.model.Output
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DiningFragment : Fragment() {
@@ -41,6 +44,13 @@ class DiningFragment : Fragment() {
 
     private fun subscribeUi() {
         binding?.let {
+
+            it.ibToggleNightMode.setOnClickListener {
+                lifecycleScope.launch {
+                    diningViewModel.toggleNightMode()
+                }
+            }
+
             adapter = DiningAdapter(onItemClick)
             it.rvDiningList.adapter = adapter
             it.swipeRefresh.setOnRefreshListener {
@@ -48,24 +58,37 @@ class DiningFragment : Fragment() {
                 diningViewModel.fetchDining()
             }
         }
-        diningViewModel.diningList.observe(viewLifecycleOwner) { result ->
 
-            binding?.swipeRefresh?.isRefreshing = when (result.status) {
-                Output.Status.SUCCESS -> {
-                    result.data?.let { list ->
-                        adapter.submitList(list)
-                    }
-                    false
-                }
-                Output.Status.ERROR -> {
-                    result.message?.let {
-                        showError(it) {
-                            diningViewModel.fetchDining()
+        with(diningViewModel) {
+
+            diningList.observe(viewLifecycleOwner) { result ->
+                binding?.swipeRefresh?.isRefreshing = when (result.status) {
+                    Output.Status.SUCCESS -> {
+                        result.data?.let { list ->
+                            adapter.submitList(list)
                         }
+                        false
                     }
-                    false
+                    Output.Status.ERROR -> {
+                        result.message?.let {
+                            showError(it) {
+                                diningViewModel.fetchDining()
+                            }
+                        }
+                        false
+                    }
+                    Output.Status.LOADING -> true
                 }
-                Output.Status.LOADING -> true
+            }
+
+            isNightMode.observe(viewLifecycleOwner) { nightMode ->
+                AppCompatDelegate.setDefaultNightMode(
+                    if (nightMode == true) {
+                        AppCompatDelegate.MODE_NIGHT_YES
+                    } else {
+                        AppCompatDelegate.MODE_NIGHT_NO
+                    }
+                )
             }
         }
     }

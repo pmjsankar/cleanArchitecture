@@ -11,5 +11,5 @@
     <color name="card_bg">#332628</color>
     <color name="text_color">#FFFFFFFF</color>
     <color name="text_color_secondary">#999999</color>
-
+    <color name="night_mode_icon_color">#F99514</color>
 </resources>

@@ -24,6 +24,10 @@ class DiningViewModelTest {
 
     @Mock
     private lateinit var diningUseCase: DiningUseCase
+
+    @Mock
+    private lateinit var userPreferences: UserPreferences
+
     private lateinit var diningViewModel: DiningViewModel
 
     @get:Rule
@@ -36,22 +40,13 @@ class DiningViewModelTest {
     fun runBlockingMainTest(block: suspend TestCoroutineScope.() -> Unit): Unit =
         coroutineDispatcherRule.testCoroutineDispatcher.runBlockingTest(block)
 
-    private val testDataList = listOf(
-        Dining(
-            offer = "30",
-            address = "Test address",
-            price = "100",
-            imageUrl = "testUrl",
-            rating = 4.5f,
-            title = "Test title",
-            desc = "Test description",
-            timing = "10am to 10pm",
-        )
-    )
+    private var obj: Dining = Mockito.mock(Dining::class.java)
+
+    private val testDataList = listOf(obj)
 
     @Before
     fun setUp() {
-        diningViewModel = DiningViewModel(diningUseCase)
+        diningViewModel = DiningViewModel(diningUseCase, userPreferences)
     }
 
     @Test
