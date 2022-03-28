@@ -48,6 +48,8 @@ dependencies {
     implementation androidx.appCompat
     implementation androidx.constraintlayout
     implementation androidx.lifecycleExt
+    implementation androidx.dataStore
+    implementation androidx.dataStoreCore
     implementation google.material
 
     //Activity extension, referring with  "by viewModels"
