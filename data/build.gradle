@@ -54,11 +54,7 @@ dependencies {
     implementation network.okhttpLoggingInterceptor
 
     //Room Database
-    implementation androidx.roomDb
     kapt androidx.kaptRoomDb
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation androidx.roomKtx
 
     testImplementation testing.unitTestingCore
     // Coroutine Testing
