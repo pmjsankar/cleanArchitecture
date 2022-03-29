@@ -40,6 +40,10 @@ class DiningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeUi()
+        diningViewModel.run {
+            fetchDining()
+            getCurrentMode()
+        }
     }
 
     private fun subscribeUi() {

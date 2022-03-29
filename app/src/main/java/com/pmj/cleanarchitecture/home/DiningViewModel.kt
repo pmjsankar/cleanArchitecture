@@ -24,11 +24,6 @@ class DiningViewModel @Inject constructor(
     private val _isNightMode = MutableLiveData<Boolean>()
     val isNightMode: LiveData<Boolean> = _isNightMode
 
-    init {
-        fetchDining()
-        getCurrentMode()
-    }
-
     /**
      * Method to fetch the dining data.
      */
@@ -43,7 +38,7 @@ class DiningViewModel @Inject constructor(
     /**
      * Method to get current mode of theme from preferences data store
      */
-    private fun getCurrentMode() {
+    fun getCurrentMode() {
         viewModelScope.launch {
             userPreferences.isNightMode.collect { nightMode ->
                 _isNightMode.postValue(nightMode ?: false)

@@ -62,4 +62,32 @@ class DiningViewModelTest {
             //THEN
             assert(1 == diningViewModel.diningList.value?.data?.size)
         }
+
+    @Test
+    fun `should return false when getCurrentMode is called`() =
+        runBlockingMainTest {
+            //GIVEN
+            val flowNightMode = flowOf(false)
+
+            //WHEN
+            Mockito.doReturn(flowNightMode).`when`(userPreferences).isNightMode
+            diningViewModel.getCurrentMode()
+
+            //THEN
+            assert(diningViewModel.isNightMode.value == false)
+        }
+
+    @Test
+    fun `should return true when getCurrentMode is called`() =
+        runBlockingMainTest {
+            //GIVEN
+            val flowNightMode = flowOf(true)
+
+            //WHEN
+            Mockito.doReturn(flowNightMode).`when`(userPreferences).isNightMode
+            diningViewModel.getCurrentMode()
+
+            //THEN
+            assert(diningViewModel.isNightMode.value == true)
+        }
 }
