@@ -1,4 +1,4 @@
-package com.pmj.cleanarchitecture
+package com.pmj.cleanarchitecture.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore

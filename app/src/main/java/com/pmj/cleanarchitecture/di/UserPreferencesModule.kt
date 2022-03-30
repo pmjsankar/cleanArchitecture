@@ -1,7 +1,7 @@
 package com.pmj.cleanarchitecture.di
 
 import android.content.Context
-import com.pmj.cleanarchitecture.UserPreferences
+import com.pmj.cleanarchitecture.datastore.UserPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,6 +1,7 @@
 package com.pmj.cleanarchitecture
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.pmj.cleanarchitecture.datastore.UserPreferences
 import com.pmj.cleanarchitecture.home.DiningViewModel
 import com.pmj.domain.model.Dining
 import com.pmj.domain.model.Output
