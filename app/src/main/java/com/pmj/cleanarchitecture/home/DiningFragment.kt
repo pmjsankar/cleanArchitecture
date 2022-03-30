@@ -37,13 +37,17 @@ class DiningFragment : Fragment() {
         it.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        subscribeUi()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         diningViewModel.run {
             fetchDining()
             getCurrentMode()
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        subscribeUi()
     }
 
     private fun subscribeUi() {
@@ -102,9 +106,7 @@ class DiningFragment : Fragment() {
      */
     private val onItemClick: (dining: Dining, view: View) -> Unit =
         { dining, view ->
-            val extras = FragmentNavigatorExtras(
-                view to dining.imageUrl.toString()
-            )
+            val extras = FragmentNavigatorExtras(view to dining.imageUrl.toString())
             findNavController().navigate(
                 R.id.home_to_detail,
                 bundleOf(ARG_DETAIL to dining),
@@ -126,8 +128,8 @@ class DiningFragment : Fragment() {
 
     private fun hideSnackBar() = snackBar?.dismiss()
 
-    override fun onStop() {
+    override fun onPause() {
         hideSnackBar()
-        super.onStop()
+        super.onPause()
     }
 }

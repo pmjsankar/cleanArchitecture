@@ -90,6 +90,8 @@ dependencies {
     testImplementation testing.unitTestingMockitoCore
 
     testImplementation testing.unitTestingJunit
-    androidTestImplementation  testing.uiTestingJunit
-    androidTestImplementation  testing.uiTestingEspresso
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions.freeCompilerArgs += ["-Xuse-experimental=io.ktor.locations.KtorExperimentalLocationsAPI"]
 }
