@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CleanArchitecture" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.CleanArchitecture" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:fontFamily">@font/cera</item>
         <item name="colorPrimaryVariant">@color/status_bar_color</item>
         <!-- Status bar color. -->
