@@ -16,7 +16,7 @@ import com.pmj.cleanarchitecture.databinding.FragmentSplashBinding
 class SplashFragment : Fragment() {
 
     companion object {
-        const val SPLASH_DELAY: Long = 800
+        const val SPLASH_DELAY: Long = 1300
     }
 
     override fun onCreateView(

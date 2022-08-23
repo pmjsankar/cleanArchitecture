@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    app:layoutDescription="@xml/scene_delivery">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivSplash"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:contentDescription="@string/app_name"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_scooter" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivRoad"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="-10dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/ivHouse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivDelivery"
+        app:srcCompat="@drawable/ic_road" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivHouse"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRoad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_house" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_splash" />
+        app:layout_constraintTop_toBottomOf="@+id/ivRoad" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
