@@ -82,6 +82,9 @@ dependencies {
     //Glide
     implementation others.glide
 
+    //Shimmer
+    implementation others.shimmer
+
     // optional - Test helpers for LiveData
     testImplementation testing.unitTestingCore
 

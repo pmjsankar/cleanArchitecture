@@ -72,12 +72,19 @@ class DiningFragment : Fragment() {
             diningList.observe(viewLifecycleOwner) { result ->
                 binding?.swipeRefresh?.isRefreshing = when (result.status) {
                     Output.Status.SUCCESS -> {
+                        binding?.shimmerLayout?.stopShimmer()
+                        binding?.shimmerLayout?.visibility = View.GONE
+                        binding?.rvDiningList?.visibility = View.VISIBLE
                         result.data?.let { list ->
                             adapter.submitList(list)
                         }
                         false
                     }
+
                     Output.Status.ERROR -> {
+                        binding?.rvDiningList?.visibility = View.VISIBLE
+                        binding?.shimmerLayout?.visibility = View.GONE
+                        binding?.shimmerLayout?.stopShimmer()
                         result.message?.let {
                             showError(it) {
                                 diningViewModel.fetchDining()
@@ -85,7 +92,10 @@ class DiningFragment : Fragment() {
                         }
                         false
                     }
-                    Output.Status.LOADING -> true
+
+                    Output.Status.LOADING -> {
+                        true
+                    }
                 }
             }
 
@@ -130,6 +140,12 @@ class DiningFragment : Fragment() {
 
     override fun onPause() {
         hideSnackBar()
+        binding?.shimmerLayout?.stopShimmer()
         super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.shimmerLayout?.startShimmer()
     }
 }

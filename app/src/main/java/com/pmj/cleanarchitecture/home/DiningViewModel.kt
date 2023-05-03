@@ -9,7 +9,6 @@ import com.pmj.domain.model.Dining
 import com.pmj.domain.model.Output
 import com.pmj.domain.usecase.DiningUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +27,6 @@ class DiningViewModel @Inject constructor(
     /**
      * Method to fetch the dining data.
      */
-    @OptIn(InternalCoroutinesApi::class)
     fun fetchDining() {
         viewModelScope.launch {
             useCase.execute().collect { diningList ->
@@ -40,7 +38,6 @@ class DiningViewModel @Inject constructor(
     /**
      * Method to get current mode of theme from preferences data store
      */
-    @OptIn(InternalCoroutinesApi::class)
     fun getCurrentMode() {
         viewModelScope.launch {
             userPreferences.isNightMode.collect { nightMode ->
