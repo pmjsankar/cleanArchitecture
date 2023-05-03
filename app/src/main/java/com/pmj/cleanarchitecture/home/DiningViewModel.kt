@@ -9,7 +9,7 @@ import com.pmj.domain.model.Dining
 import com.pmj.domain.model.Output
 import com.pmj.domain.usecase.DiningUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +29,7 @@ class DiningViewModel @Inject constructor(
      */
     fun fetchDining() {
         viewModelScope.launch {
-            useCase.execute().collect { diningList ->
+            useCase.execute().collectLatest { diningList ->
                 _diningList.postValue(diningList)
             }
         }

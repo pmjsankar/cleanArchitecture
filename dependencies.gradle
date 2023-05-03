@@ -1,5 +1,6 @@
 ext {
     def gradleVersion = "7.1.2"
+    def firebaseVersion = "4.3.15"
     def kotlinGradleVersion = "1.6.10"
     def hiltGradleVersion = "2.40.5"
     def appCompatVersion = "1.4.1"
@@ -30,11 +31,13 @@ ext {
     def glideVersion = '4.12.0'
     def dataStore = '1.0.0'
     def shimmer = '0.5.0'
+    def firebaseDb = '20.2.1'
 
     classPaths = [
             gradlePath      : "com.android.tools.build:gradle:$gradleVersion",
             kotlinGradlePath: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradleVersion",
-            hiltPath        : "com.google.dagger:hilt-android-gradle-plugin:$hiltGradleVersion"
+            hiltPath        : "com.google.dagger:hilt-android-gradle-plugin:$hiltGradleVersion",
+            googlePath      : "com.google.gms:google-services:$firebaseVersion"
     ]
 
     androidx = [
@@ -82,7 +85,8 @@ ext {
             unitTestingJunit      : "junit:junit:$testJunit",
     ]
     others = [
-            glide  : "com.github.bumptech.glide:glide:$glideVersion",
-            shimmer: "com.facebook.shimmer:shimmer:$shimmer"
+            glide     : "com.github.bumptech.glide:glide:$glideVersion",
+            shimmer   : "com.facebook.shimmer:shimmer:$shimmer",
+            firebaseDb: "com.google.firebase:firebase-database-ktx:$firebaseDb"
     ]
 }

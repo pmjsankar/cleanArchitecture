@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 apply from: '../dependencies.gradle'
@@ -84,6 +85,9 @@ dependencies {
 
     //Shimmer
     implementation others.shimmer
+
+    //Firebase
+    implementation others.firebaseDb
 
     // optional - Test helpers for LiveData
     testImplementation testing.unitTestingCore

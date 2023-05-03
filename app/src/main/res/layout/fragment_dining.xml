@@ -44,7 +44,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/tvDiningListTitle">
 
         <LinearLayout
@@ -82,7 +82,7 @@
             android:id="@+id/rvDiningList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/list_item_dining" />

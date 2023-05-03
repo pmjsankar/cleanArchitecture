@@ -15,16 +15,19 @@ import com.google.android.material.snackbar.Snackbar
 import com.pmj.cleanarchitecture.R
 import com.pmj.cleanarchitecture.databinding.FragmentDiningBinding
 import com.pmj.cleanarchitecture.home.DiningDetailsFragment.Companion.ARG_DETAIL
+import com.pmj.cleanarchitecture.utils.gone
+import com.pmj.cleanarchitecture.utils.visible
 import com.pmj.domain.model.Dining
-import com.pmj.domain.model.Output
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class DiningFragment : Fragment() {
 
     private val diningViewModel: DiningViewModel by viewModels()
-    private var binding: FragmentDiningBinding? = null
+    private val firebaseDbViewModel: FirebaseDbViewModel by viewModels()
+    private lateinit var binding: FragmentDiningBinding
     private lateinit var adapter: DiningAdapter
     private var snackBar: Snackbar? = null
 
@@ -39,10 +42,8 @@ class DiningFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        diningViewModel.run {
-            fetchDining()
-            getCurrentMode()
-        }
+        diningViewModel.getCurrentMode()
+        firebaseDbViewModel.fetchDining()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,63 +52,51 @@ class DiningFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-        binding?.let {
-
-            it.ibToggleNightMode.setOnClickListener {
-                lifecycleScope.launch {
-                    diningViewModel.toggleNightMode()
-                }
-            }
-
-            adapter = DiningAdapter(onItemClick)
-            it.rvDiningList.adapter = adapter
-            it.swipeRefresh.setOnRefreshListener {
-                hideSnackBar()
-                diningViewModel.fetchDining()
+        binding.ibToggleNightMode.setOnClickListener {
+            lifecycleScope.launch {
+                diningViewModel.toggleNightMode()
             }
         }
 
-        with(diningViewModel) {
+        adapter = DiningAdapter(onItemClick)
+        binding.rvDiningList.adapter = adapter
+        binding.swipeRefresh.setOnRefreshListener {
+            hideSnackBar()
+            firebaseDbViewModel.fetchDining()
+        }
 
-            diningList.observe(viewLifecycleOwner) { result ->
-                binding?.swipeRefresh?.isRefreshing = when (result.status) {
-                    Output.Status.SUCCESS -> {
-                        binding?.shimmerLayout?.stopShimmer()
-                        binding?.shimmerLayout?.visibility = View.GONE
-                        binding?.rvDiningList?.visibility = View.VISIBLE
-                        result.data?.let { list ->
-                            adapter.submitList(list)
-                        }
-                        false
-                    }
+        firebaseDbViewModel.diningViewState.observe(viewLifecycleOwner) { diningState ->
+            when (diningState) {
+                is DiningViewState.Loading -> {
+                    binding.swipeRefresh.isRefreshing = true
+                    binding.shimmerLayout.visible()
+                    binding.rvDiningList.gone()
+                }
 
-                    Output.Status.ERROR -> {
-                        binding?.rvDiningList?.visibility = View.VISIBLE
-                        binding?.shimmerLayout?.visibility = View.GONE
-                        binding?.shimmerLayout?.stopShimmer()
-                        result.message?.let {
-                            showError(it) {
-                                diningViewModel.fetchDining()
-                            }
-                        }
-                        false
-                    }
+                is DiningViewState.Success -> {
+                    binding.swipeRefresh.isRefreshing = false
+                    binding.shimmerLayout.gone()
+                    binding.rvDiningList.visible()
+                    adapter.submitList(diningState.data)
+                }
 
-                    Output.Status.LOADING -> {
-                        true
-                    }
+                is DiningViewState.Error -> {
+                    binding.swipeRefresh.isRefreshing = false
+                    binding.shimmerLayout.gone()
+                    binding.rvDiningList.visible()
+                    showError(diningState.message) { firebaseDbViewModel.fetchDining() }
                 }
             }
+        }
 
-            isNightMode.observe(viewLifecycleOwner) { nightMode ->
-                AppCompatDelegate.setDefaultNightMode(
-                    if (nightMode == true) {
-                        AppCompatDelegate.MODE_NIGHT_YES
-                    } else {
-                        AppCompatDelegate.MODE_NIGHT_NO
-                    }
-                )
-            }
+        diningViewModel.isNightMode.observe(viewLifecycleOwner) { nightMode ->
+            AppCompatDelegate.setDefaultNightMode(
+                if (nightMode == true) {
+                    AppCompatDelegate.MODE_NIGHT_YES
+                } else {
+                    AppCompatDelegate.MODE_NIGHT_NO
+                }
+            )
         }
     }
 
@@ -140,12 +129,12 @@ class DiningFragment : Fragment() {
 
     override fun onPause() {
         hideSnackBar()
-        binding?.shimmerLayout?.stopShimmer()
+        binding.shimmerLayout.stopShimmer()
         super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        binding?.shimmerLayout?.startShimmer()
+        binding.shimmerLayout.startShimmer()
     }
 }
