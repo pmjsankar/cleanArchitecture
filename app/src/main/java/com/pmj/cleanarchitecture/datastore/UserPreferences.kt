@@ -3,8 +3,8 @@ package com.pmj.cleanarchitecture.datastore
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -16,17 +16,17 @@ class UserPreferences @Inject constructor(private val context: Context) {
 
     companion object {
         val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "dining_pref_store")
-        val KEY_NIGHT_MODE = booleanPreferencesKey("key_night_mode")
+        val KEY_NIGHT_MODE = intPreferencesKey("key_night_mode")
     }
 
-    val isNightMode: Flow<Boolean?>
+    val selectedTheme: Flow<Int>
         get() = context.dataStore.data.map { preferences ->
-            preferences[KEY_NIGHT_MODE]
+            preferences[KEY_NIGHT_MODE] ?: 0
         }
 
-    suspend fun toggleNightMode(isDarkMode: Boolean) {
+    suspend fun saveTheme(selectedTheme: Int) {
         context.dataStore.edit { preferences ->
-            preferences[KEY_NIGHT_MODE] = isDarkMode
+            preferences[KEY_NIGHT_MODE] = selectedTheme
         }
     }
 

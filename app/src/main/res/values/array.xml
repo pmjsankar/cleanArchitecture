@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="theme_array">
+        <item>@string/system_default</item>
+        <item>@string/light</item>
+        <item>@string/dark</item>
+    </string-array>
+</resources>

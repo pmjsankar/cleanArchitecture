@@ -6,4 +6,15 @@
     <string name="_reviews">2,456\nReviews</string>
     <string name="retry">RETRY</string>
     <string name="toggle_night_mode">toggle night mode</string>
+    <string name="welcome_to_the_world_of_fine_dining">Welcome to the world of fine dining</string>
+    <string name="an_error_occurred">An error occurred. Please try again.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_theme">Choose theme</string>
+    <string name="system_default">System default</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="logout_msg">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

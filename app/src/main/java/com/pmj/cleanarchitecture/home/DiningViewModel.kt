@@ -21,8 +21,8 @@ class DiningViewModel @Inject constructor(
 
     private val _diningList = MutableLiveData<Output<List<Dining>>>()
     val diningList: LiveData<Output<List<Dining>>> = _diningList
-    private val _isNightMode = MutableLiveData<Boolean>()
-    val isNightMode: LiveData<Boolean> = _isNightMode
+    private val _selectedTheme = MutableLiveData<Int>()
+    val selectedTheme: LiveData<Int> = _selectedTheme
 
     /**
      * Method to fetch the dining data.
@@ -40,8 +40,8 @@ class DiningViewModel @Inject constructor(
      */
     fun getCurrentMode() {
         viewModelScope.launch {
-            userPreferences.isNightMode.collect { nightMode ->
-                _isNightMode.postValue(nightMode ?: false)
+            userPreferences.selectedTheme.collect { themeIndex ->
+                _selectedTheme.postValue(themeIndex)
             }
         }
     }
@@ -49,9 +49,9 @@ class DiningViewModel @Inject constructor(
     /**
      * Method to store user selected mode of theme into preferences data store
      */
-    fun toggleNightMode() {
+    fun toggleNightMode(selectedTheme: Int) {
         viewModelScope.launch {
-            _isNightMode.value?.let { userPreferences.toggleNightMode(!it) }
+            userPreferences.saveTheme(selectedTheme = selectedTheme)
         }
     }
 }

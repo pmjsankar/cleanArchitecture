@@ -23,7 +23,9 @@ class DiningDetailsFragment : Fragment() {
         lifecycleOwner = this@DiningDetailsFragment
         item = arguments?.getParcelable(ARG_DETAIL)
         sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+            context?.let {
+                TransitionInflater.from(it).inflateTransition(android.R.transition.move)
+            }
 
         ivBack.setOnClickListener {
             findNavController().popBackStack()

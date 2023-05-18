@@ -10,12 +10,12 @@ plugins {
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.pmj.cleanarchitecture"
         minSdk 28
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -74,7 +74,6 @@ dependencies {
     kapt hilt.kaptHiltAndroidCompiler
 
     //For Hilt support for ViewModel
-    implementation hilt.hiltViewModel
     kapt hilt.kaptHiltCompiler
 
     //Coroutines
@@ -87,7 +86,9 @@ dependencies {
     implementation others.shimmer
 
     //Firebase
-    implementation others.firebaseDb
+    implementation firebase.firebaseDb
+    implementation firebase.firebaseAuth
+    implementation firebase.playServicesAuth
 
     // optional - Test helpers for LiveData
     testImplementation testing.unitTestingCore
